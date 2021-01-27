@@ -1,0 +1,25 @@
+{
+  "name": "confession-bot",
+  "version": "1.0.0",
+  "description": "starting to learn discordbotjs",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "if-env NODE_ENV='production' && npm run start:prod || npm run start:dev",
+    "start:prod": "node main.js",
+    "start:dev": "nodemon -r dotenv/config main.js"
+  },
+  "author": "Lemon",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "discord.js": "^12.3.1",
+    "dotenv": "^8.2.0",
+    "glob": "^7.1.6",
+    "if-env": "^1.0.4",
+    "sqlite3": "^5.0.0",
+    "uniqid": "^5.2.0",
+    "xivapi-js": "^0.3.0"
+  },
+  "devDependencies": {}
+}
