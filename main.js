@@ -6,6 +6,7 @@ const onChannelModeration = require('./events/onChannelModeration');
 const onDirectMessage = require('./events/onDirectMessage');
 const {createTables} = require('./db/dbORM');
 const glob = require('glob');
+const fs = require('fs');
 
 const client = new Discord.Client(PARTIALS);
 
@@ -21,7 +22,8 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
     console.log(`I'm online!`);
-    createTables();
+    if (!fs.existsSync('./db/CatsTale'))
+        createTables();
 });
 
 client.on('message', message => {

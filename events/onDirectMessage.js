@@ -73,6 +73,7 @@ const onDirectMessage = (client, message) => {
               if ((reaction.message.id === embedMessage.id) &&
                 (reaction.message.channel.id === embedMessage.channel.id) &&
                 (user.id !== embedMessage.author.id) &&
+                (embedMessage.reactions.cache.get('✅').count < 3) &&
                 ('✅'.localeCompare(reaction.emoji.name) === 0)) {
                 
                 const pubEmbedMessage = new Discord.MessageEmbed()
@@ -86,7 +87,6 @@ const onDirectMessage = (client, message) => {
                   const pguild = client.guilds.cache.get(pgid);
                   const pubChannel = pguild.channels.cache.get(pcid);
                   let jsonData = {count: -1};
-                  
                   fs.readFile("./db/confessioncount.json", "utf-8", function (err, data) {
                     jsonData = JSON.parse(data);
                     jsonData.count++;
