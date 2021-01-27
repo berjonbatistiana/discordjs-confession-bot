@@ -57,7 +57,7 @@ const onGuildModeration = (prefix, client, message) => {
       break;
     case 'roleid':
       const returnMessage = client.commands.get('role_id').execute(message, args, client);
-      message.author.send(`Role ID is: ${returnMessage}`)
+      message.author.send(`Role ID is: ${returnMessage.returnId} Role Position is: ${returnMessage.returnPos}`)
         .catch(e => {
           console.log(e)
         });
