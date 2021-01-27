@@ -35,8 +35,8 @@ client.on('message', message => {
     }
 });
 // last line of this file
-// if (process.env.NODE_ENV === 'production') {
-//     client.login(process.env.DISCORD_PROD_TOKEN).catch(e => console.log(e)); // main
-// } else {
+if (process.env.NODE_ENV === 'production') {
+    client.login(process.env.DISCORD_PROD_TOKEN).catch(e => console.log(e)); // main
+} else {
     client.login(process.env.DISCORD_DEV_TOKEN).catch(e => console.log(e)); // dev
-// }
+}
