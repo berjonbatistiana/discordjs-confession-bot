@@ -48,16 +48,6 @@ const CREATE_ROLE_TABLE =
 //     FOREIGN KEY (ch_valid) REFERENCES ${CHANNEL_TABLE}(ch_id)
 //   )`;
 
-const CREATE_ROLE_FUNCTION_TABLE =
-  `CREATE TABLE
-  IF NOT EXISTS
-  ${ROLE_FN_TABLE}(
-    role_id TEXT NOT NULL,
-    role_name TEXT NOT NULL,
-    fn_code NOT NULL UNIQUE,
-    guild_id TEXT NOT NULL,
-    PRIMARY KEY(fn_id)
-  )`;
 
 const CREATE_CHANNEL_FUNCTION_TABLE =
   `CREATE TABLE 
@@ -69,6 +59,17 @@ const CREATE_CHANNEL_FUNCTION_TABLE =
       guild_id TEXT NOT NULL,
       PRIMARY KEY (fn_id)
     )`;
+
+const CREATE_ROLE_FUNCTION_TABLE =
+  `CREATE TABLE
+  IF NOT EXISTS
+  ${ROLE_FN_TABLE}(
+    role_id TEXT NOT NULL,
+    role_name TEXT NOT NULL,
+    fn_code NOT NULL UNIQUE,
+    guild_id TEXT NOT NULL,
+    PRIMARY KEY(fn_code, role_id)
+  )`;
 
 module.exports = {
   DB,

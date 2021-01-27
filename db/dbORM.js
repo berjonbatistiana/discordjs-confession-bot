@@ -5,6 +5,9 @@ const {
   ROLE_FN_TABLE,
   ROLE_MIN_TABLE,
   CREATE_ROLE_FUNCTION_TABLE,
+  CREATE_GUILD_TABLE,
+  CREATE_ROLE_TABLE,
+  CREATE_CHANNEL_TABLE,
 } = require('./dbQueries');
 
 const sqlite = require('sqlite3').verbose();
@@ -13,6 +16,9 @@ const dbPath = './db/' + DB;
 function createTables() {
   // open and create db
   const db = new sqlite.Database(dbPath, sqlite.OPEN_READWRITE | sqlite.OPEN_CREATE);
+  db.run(CREATE_GUILD_TABLE);
+  db.run(CREATE_ROLE_TABLE);
+  db.run(CREATE_CHANNEL_TABLE);
   db.run(CREATE_CHANNEL_FUNCTION_TABLE);
   db.run(CREATE_ROLE_FUNCTION_TABLE);
 }
