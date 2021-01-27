@@ -16,7 +16,7 @@ Current Channel Function Names:
 
 !role: assigns a minimum role of who can use the confession function
 
-`!role <role name>`
+`!roleassign <role name> <role function name>`
 
 Current Role Function Names:
 

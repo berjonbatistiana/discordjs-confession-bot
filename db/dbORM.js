@@ -33,7 +33,7 @@ function getChannelFn(fid, callback) {
 function getMinRole(fid, callback) {
 
   const db = new sqlite.Database(dbPath, sqlite.OPEN_READWRITE);
-  const query = `SELECT * FROM ${ROLE_FN_TABLE} WHERE fn_id = ?`;
+  const query = `SELECT * FROM ${ROLE_FN_TABLE} WHERE fn_code = ?`;
   db.get(query, [fid], callback);
 }
 
@@ -50,7 +50,7 @@ function insertChannelFn(ch, fnCode, callback) {
 function insertRoleFn(role, fnCode, callback) {
 
   const db = new sqlite.Database(dbPath, sqlite.OPEN_READWRITE);
-  let insertRole = db.prepare(`INSERT INTO ${ROLE_FN_TABLE}(role_id, role_name, guild_id, fn_id) VALUES(?,?,?,?) ON CONFLICT(fn_id) DO UPDATE SET role_id = ?, role_name = ?, guild_id = ?`)
+  let insertRole = db.prepare(`INSERT INTO ${ROLE_FN_TABLE}(role_id, role_name, guild_id, fn_code) VALUES(?,?,?,?) ON CONFLICT(fn_code) DO UPDATE SET role_id = ?, role_name = ?, guild_id = ?`)
   insertRole.run([role.id, role.name, role.gid, fnCode, role.id, role.name, role.gid], callback);
   insertRole.finalize();
   db.close();
