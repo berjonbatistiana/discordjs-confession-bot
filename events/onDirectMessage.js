@@ -47,9 +47,9 @@ const onDirectMessage = (client, message) => {
         // eligibility check
         let proceed = false
         memberRoles.forEach(role => {
-          console.log(minRole)
-          console.log(role)
-          // console.log(`min role: ${minRole.position} >= their role: ${role.position}`)
+          // console.log(minRole)
+          // console.log(role)
+          console.log(`min role: ${minRole.position} >= their role: ${role.position}`)
           if (minRole.position <= role.position)
             proceed = true;
         })
