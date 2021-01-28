@@ -27,7 +27,7 @@ module.exports = {
       return;
     }
 
-    const id = client.commands.get('role_id').execute(message, [roleName], client)
+    const {returnId:id} = client.commands.get('role_id').execute(message, [roleName], client)
     const gid = message.guild.id;
 
     insertRoleFn({name: roleName, id, gid}, fnCode, (err) => {
