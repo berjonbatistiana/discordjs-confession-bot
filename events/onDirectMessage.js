@@ -32,7 +32,7 @@ const onDirectMessage = (client, message) => {
       
       const memberRolePos = member.first().roles.highest.position;
       
-      // Get the minimum role to be able to confess
+      // Get the minimum role to be able to confess.
       getMinRole(fnRoCode, (err, row) => {
         // guard if row returns undefined
         if (!row || row.length < 1) {
