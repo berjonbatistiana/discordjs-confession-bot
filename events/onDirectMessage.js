@@ -39,13 +39,17 @@ const onDirectMessage = (client, message) => {
           message.author.send('The confessional is not set up yet! Try again later.')
           return;
         }
+  
+        console.table(row);
         
         const minRole = guild.roles.cache.get(row.role_id);
         
         // eligibility check
         let proceed = false
         memberRoles.forEach(role => {
-          console.log(`min role: ${minRole.position} >= their role: ${role.position}`)
+          console.log(minRole)
+          console.log(role)
+          // console.log(`min role: ${minRole.position} >= their role: ${role.position}`)
           if (minRole.position <= role.position)
             proceed = true;
         })
