@@ -49,7 +49,7 @@ const onDirectMessage = (client, message) => {
         memberRoles.forEach(role => {
           // console.log(minRole)
           // console.log(role)
-          console.log(`min role: ${minRole.position} >= their role: ${role.position}`)
+          console.log(`min role: ${minRole.position} <= their role: ${role.position}: ${minRole.position <= role.position}`)
           if (minRole.position <= role.position)
             proceed = true;
         })
@@ -59,7 +59,8 @@ const onDirectMessage = (client, message) => {
           message.author.send('Sorry, you are not eligible yet to send a confession. Contact the server admins for more details.')
           return;
         }
-        
+  
+        console.log(proceed)
         // lookup guild key (keyarray) in table for all keys
         returnChannel.send(
           // Message Content
