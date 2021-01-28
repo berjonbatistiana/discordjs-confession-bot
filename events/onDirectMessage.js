@@ -28,9 +28,9 @@ const onDirectMessage = (client, message) => {
     }
     
     // fetch all members of the guild to check if they are eligible to confess
-    guild.members.fetch(message.author.id).then(member => {
+    guild.members.fetch({user: [message.author.id], cache: false}).then(member => {
       
-      const memberRoles = member.roles.cache;
+      const memberRolePos = member.first().roles.highest.position;
       
       // Get the minimum role to be able to confess
       getMinRole(fnRoCode, (err, row) => {
@@ -39,27 +39,20 @@ const onDirectMessage = (client, message) => {
           message.author.send('The confessional is not set up yet! Try again later.')
           return;
         }
-  
+        
         console.table(row);
         
         const minRole = guild.roles.cache.get(row.role_id);
         
         // eligibility check
-        let proceed = false
-        memberRoles.forEach(role => {
-          // console.log(minRole)
-          // console.log(role)
-          console.log(`min role: ${minRole.position} <= their role: ${role.position}: ${minRole.position <= role.position}`)
-          if (minRole.position <= role.position)
-            proceed = true;
-        })
+        const proceed = minRole.position <= memberRolePos
         
         // eligibility guard
         if (!proceed) {
           message.author.send('Sorry, you are not eligible yet to send a confession. Contact the server admins for more details.')
           return;
         }
-  
+        
         console.log(proceed)
         // lookup guild key (keyarray) in table for all keys
         returnChannel.send(
