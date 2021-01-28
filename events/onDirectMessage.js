@@ -52,7 +52,7 @@ const onDirectMessage = (client, message) => {
         
         // eligibility guard
         if (!proceed) {
-          message.author.send('Sorry, you are not eligible yet to send a confession. Contact the server admins for more details!')
+          message.author.send('Sorry, you are not eligible yet to send a confession. Contact the server admins for more details.')
           return;
         }
         
