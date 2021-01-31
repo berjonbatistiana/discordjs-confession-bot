@@ -1,7 +1,7 @@
 
 # About
 
-This is a confession bot used in discord. It is used for anonymous posting of embarassing stories or revelations to the server. The messages are moderated by a team to be approved before the confession is publicly posted. It uses an SQL server to store the id's of the channels where confessions are to be posted.
+This is a confession bot used in discord. It is used for anonymous posting of embarassing stories or revelations to the server. The messages are moderated by a team to be approved before the confession is publicly posted. It uses an SQL server to store the id's of the channels where confessions are to be posted. All confessions are anonymous and are never recorded anywhere by the bot. As such there is no retrieval of old confessions and who confessed them.
 
 # Command lists
 
@@ -11,7 +11,7 @@ This is a confession bot used in discord. It is used for anonymous posting of em
 
 !channelassign: assigns a designated channel or where this command is invoked to a specific function.
  
-`!channelassign <channel name?> <function name>`
+`[!channelassign <channel name?> <function name>]`
 
 
 Current Channel Function Names:
@@ -21,15 +21,12 @@ Current Channel Function Names:
 
 !role: assigns a minimum role of who can use the confession function
 
-`!roleassign <role name> <role function name>`
+`[!roleassign <role name> <role function name>]`
 
 Current Role Function Names:
 
  - confession_role: The minimum role of who can use the confession.
 
-!res, responds to a user dm using the response ID
+!confessioncount, returns the current amount of confessions publicly posted or set the current number of confession count
 
- `[!res <id> <message>]`
- 
-
-.lodestone
+`!confessioncount <number?>`
