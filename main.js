@@ -4,9 +4,7 @@ const util = require('util');
 const onGuildModeration = require('./events/onGuildModeration');
 const onChannelModeration = require('./events/onChannelModeration');
 const onDirectMessage = require('./events/onDirectMessage');
-const {createTables} = require('./db/dbORM');
 const glob = require('glob');
-const fs = require('fs');
 
 const client = new Discord.Client(PARTIALS);
 
