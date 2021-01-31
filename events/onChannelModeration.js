@@ -30,6 +30,14 @@ const onChannelModeration = (prefix, client, message) => {
             });
             message.delete()
             break;
+        case 'confessioncount':
+            client.commands.get('set_confession_count').execute(message, args, response => {
+                message.channel.send(`Confession counter: ${response}`).then(notify => {
+                    notify.delete({timeout:5000})
+                })
+            });
+            message.delete();
+            break;
         default:
             break;
     }

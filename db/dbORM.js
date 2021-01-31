@@ -109,5 +109,7 @@ module.exports = {
   insertChannelFn,
   insertRoleFn,
   getMinRole,
-  addOneConfessionCount
+  addOneConfessionCount,
+  getConfessionCount,
+  insertConfessionCount
 };
