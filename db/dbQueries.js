@@ -1,43 +1,45 @@
-const DB = 'CatsTale';
-const CHANNEL_FN_TABLE = 'channel_assignments';
-const ROLE_FN_TABLE = 'role_function';
+const CHANNEL_FN_TABLE = 'channel_assignments_table';
+const ROLE_FN_TABLE = 'role_function_table';
 const GUILD_TABLE = 'guild_table';
+const CONFESSION_COUNT_TABLE = 'confession_count_table';
 
-const CREATE_GUILD_TABLE =
-  `CREATE TABLE IF NOT EXISTS
-  ${GUILD_TABLE}(
-    guild_id TEXT NOT NULL UNIQUE,
-    guild_name TEXT NOT NULL,
-    PRIMARY KEY(guild_id)
-    ON CONFLICT REPLACE
-  )`;
-
-
-const CREATE_CHANNEL_FUNCTION_TABLE =
-  `CREATE TABLE 
-    IF NOT EXISTS 
-    ${CHANNEL_FN_TABLE}(
-      channel_id TEXT NOT NULL, 
-      channel_name TEXT NOT NULL, 
-      fn_id INT NOT NULL UNIQUE, 
-      guild_id TEXT NOT NULL,
-      PRIMARY KEY (fn_id)
-    )`;
-
-const CREATE_ROLE_FUNCTION_TABLE =
-  `CREATE TABLE
-  IF NOT EXISTS
-  ${ROLE_FN_TABLE}(
-    role_id TEXT NOT NULL,
-    role_name TEXT NOT NULL,
-    fn_code NOT NULL UNIQUE,
-    guild_id TEXT NOT NULL,
-    PRIMARY KEY(fn_code, role_id)
-  )`;
+const selectChannelFnByIdQuery = `SELECT * FROM ${CHANNEL_FN_TABLE} WHERE fn_id = ?`;
+const selectMinRoleByIdQuery = `SELECT * FROM ${ROLE_FN_TABLE} WHERE fn_code = ?`;
+const selectConfessionCountByGuildIdQuery = `SELECT * FROM ${CONFESSION_COUNT_TABLE} WHERE guild_id = ?`
+const insertChannelQuery = `
+  INSERT INTO
+  ${CHANNEL_FN_TABLE}(channel_id, channel_name, guild_id, fn_id)
+  VALUES(?,?,?,?)
+  ON duplicate key update
+  channel_id = ?,
+  channel_name = ?,
+  guild_id = ?;
+  `;
+const insertRoleQuery =  `
+  INSERT INTO
+  ${ROLE_FN_TABLE}(role_id, role_name, guild_id, fn_code)
+  VALUES(?,?,?,?)
+  ON DUPLICATE KEY UPDATE
+  role_id = ?,
+  role_name = ?,
+  guild_id = ?;
+  `;
+const insertConfessionCountQuery = `
+  INSERT INTO
+  ${CONFESSION_COUNT_TABLE}(guild_id, confession_count)
+  VALUES(?,?)
+  ON DUPLICATE KEY UPDATE
+  confession_count = ?
+  `;
 
 module.exports = {
-  DB,
   CHANNEL_FN_TABLE,
   ROLE_FN_TABLE,
   GUILD_TABLE,
+  selectChannelFnByIdQuery,
+  selectMinRoleByIdQuery,
+  selectConfessionCountByGuildIdQuery,
+  insertChannelQuery,
+  insertRoleQuery,
+  insertConfessionCountQuery,
 }

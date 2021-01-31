@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const {getChannelFn, getMinRole} = require('../db/dbORM');
+const {getChannelFn, getMinRole, addOneConfessionCount} = require('../db/dbORM');
 const c = require('../constants');
 const fs = require('fs');
 
@@ -40,8 +40,6 @@ const onDirectMessage = async (client, message) => {
           return;
         }
         
-        console.table(row);
-        
         const minRole = guild.roles.cache.get(row.role_id);
         
         // eligibility check
@@ -53,7 +51,6 @@ const onDirectMessage = async (client, message) => {
           return;
         }
         
-        console.log(proceed)
         // lookup guild key (keyarray) in table for all keys
         returnChannel.send(
           // Message Content
@@ -84,22 +81,12 @@ const onDirectMessage = async (client, message) => {
                   const pcid = prow.channel_id;
                   const pguild = client.guilds.cache.get(pgid);
                   const pubChannel = pguild.channels.cache.get(pcid);
-                  let jsonData = {count: -1};
-                  fs.readFile("./db/confessioncount.json", "utf-8", function (err, data) {
-                    jsonData = JSON.parse(data);
-                    jsonData.count++;
-                    
-                    fs.writeFile("./db/confessioncount.json", JSON.stringify(jsonData), err => {
-                      if (err)
-                        console.error(err)
-                      else
-                        pubChannel.send(pubEmbedMessage.setTitle(`**Confession #${jsonData.count}**`));
-                      
-                    })
+  
+                  await addOneConfessionCount(pgid, (err, data) => {
+                    if (!err)
+                      pubChannel.send(pubEmbedMessage.setTitle(`**Confession #${data.confession_count}**`));
                   })
-                  
                 })
-                
               }
             }
           )
