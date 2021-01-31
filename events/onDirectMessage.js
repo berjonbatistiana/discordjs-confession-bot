@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const {getChannelFn, getMinRole, addOneConfessionCount} = require('../db/dbORM');
 const c = require('../constants');
-const fs = require('fs');
 
 const onDirectMessage = async (client, message) => {
   
@@ -59,7 +58,6 @@ const onDirectMessage = async (client, message) => {
             .setColor('#00FF00')
             .setTimestamp(message.createdAt)
         ).then(async embedMessage => {
-          
           
           await embedMessage.react('✅');
           await embedMessage.react('❌');
