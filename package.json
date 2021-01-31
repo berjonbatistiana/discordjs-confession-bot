@@ -12,12 +12,13 @@
   "author": "Lemon",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "glob": "^7.1.6",
     "if-env": "^1.0.4",
-    "sqlite3": "^5.0.0",
+    "mysql2": "^2.2.5",
+    "pg": "^8.5.1",
     "uniqid": "^5.2.0",
     "xivapi-js": "^0.3.0"
   },

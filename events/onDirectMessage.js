@@ -3,14 +3,14 @@ const {getChannelFn, getMinRole} = require('../db/dbORM');
 const c = require('../constants');
 const fs = require('fs');
 
-const onDirectMessage = (client, message) => {
+const onDirectMessage = async (client, message) => {
   
   const fnChCode = c.CHANNEL_FUNCTION_CODES.get('confessions');
   const fnRoCode = c.ROLE_FUNCTION_CODES.get('confession_role')
   const fnPubConCode = c.CHANNEL_FUNCTION_CODES.get('confessions_public')
   
   // Get Channel to send the message first together with guild id
-  getChannelFn(fnChCode, (err, row) => {
+  await getChannelFn(fnChCode, (err, row) => {
     
     // guard if row returns undefined
     if (!row || row.length < 1) {
