@@ -1,4 +1,9 @@
-Command lists
+
+# About
+
+This is a confession bot used in discord. It is used for anonymous posting of embarassing stories or revelations to the server. The messages are moderated by a team to be approved before the confession is publicly posted. It uses an SQL server to store the id's of the channels where confessions are to be posted.
+
+# Command lists
 
 !channelid, returns the id of the channel or of a specified channel.
 
